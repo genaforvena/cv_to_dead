@@ -9,7 +9,7 @@ class CvFormFiller:
         cv = self._ollama.chat(
             "Fill the following cv template with skills and experience: "
             + cv_template
-            + "\n to make a great fit for the following job description:\n"
+            + "\n to make a great fit for the following job description, but will not re-phrase it:\n"
             + job_description
         )
         return cv
