@@ -7,7 +7,7 @@ class CvFormFiller:
 
     def fill(self, cv_template: str, job_description: str) -> str:
         cv = self._ollama.chat(
-            "Add text to the following template: "
+            "Fill the following cv template with skills and experience: "
             + cv_template
             + "\n to make a great fit for the following job description:\n"
             + job_description

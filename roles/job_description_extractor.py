@@ -7,6 +7,7 @@ class JobDescriptionExtractor:
 
     def extract(self, job_description_html: str) -> str:
         job_description = self._ollama.chat(
-            "Extract in job description string from html: " + job_description_html
+            "Extract in job description and requirements for the role as a string from html: "
+            + job_description_html
         )
         return job_description
