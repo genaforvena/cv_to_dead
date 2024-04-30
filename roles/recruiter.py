@@ -11,7 +11,6 @@ class Recruiter:
             + job_description
             + "\nThe CV is: "
             + cv
-            + ". If the CV is suitable for the job, please responsd with 'yes' otherwise 'no'."
+            + ". If the CV is suitable for the job, please respond with 'yes', otherwise respond 'no'."
         )
-        response = response["content"]["message"]
         return "yes" in response.lower()
