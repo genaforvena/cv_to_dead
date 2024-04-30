@@ -53,3 +53,4 @@ docs/_build/
 
 # Intent to not keep checkpoints of summarization in git. Probs not the best solution though in terms of good .gitignore.
 *.json
+resources/

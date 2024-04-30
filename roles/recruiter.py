@@ -1,4 +1,4 @@
-from llm_utils.ollama import Ollama
+from llm.ollama import Ollama
 
 
 class Recruiter:

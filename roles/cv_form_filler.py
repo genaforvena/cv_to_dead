@@ -1,13 +1,13 @@
 from llm.ollama import Ollama
 
 
-class CvCreator:
+class CvFormFiller:
     def __init__(self):
         self._ollama = Ollama()
 
-    def create_cv(self, job_description: str, cv_template: str) -> str:
+    def fill(self, cv_template: str, job_description: str) -> str:
         cv = self._ollama.chat(
-            "Fill out this CV: "
+            "Add text to the following template: "
             + cv_template
             + "\n to make a great fit for the following job description:\n"
             + job_description
