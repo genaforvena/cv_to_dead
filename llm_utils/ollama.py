@@ -5,9 +5,9 @@ class Ollama:
     def __init__(self):
         self._history = []
 
-    def _ask(self, command_for: str, text: str) -> str:
+    def chat(self, prompt: str) -> str:
         print()
-        message = {"role": "user", "content": command_for + " " + text}
+        message = {"role": "user", "content": prompt}
         self._history.append(message)
         resp = ollama.chat(model="phi3mini", messages=self._history, stream=True)
         msg = ""
