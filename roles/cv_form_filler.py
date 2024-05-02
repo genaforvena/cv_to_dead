@@ -11,6 +11,7 @@ class CvFormFiller:
             + cv_template
             + "'''\n\n with relevant skills and experience information to make the cv a good match for the following job description:\n\n'''"
             + job_description
-            + "'''\n\n but avoid copying the job description verbatim and feel free to make it slightly different from the description."
+            + "'''\n\n but avoid copying the job description verbatim and make CV skills a tiny bit different from the description."
+            + " Each placeholder replacement should be at least three items and all items should be unique. Only replace placeholders, keep the rest intact. "
         )
         return cv
