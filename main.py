@@ -27,8 +27,9 @@ if __name__ == "__main__":
         print(cv)
         review_passed = recruiter().review_cv(job_description, cv)
     if cv is not None:
-        with open("resources/cv.md", "w") as f:
+        md_file_name = "resources/cv.md"
+        with open(md_file_name, "w") as f:
             f.write(cv)
-        converter.Converter(args.output).convert(cv)
+        converter.Converter(args.output).convert(md_file_name)
     else:
         print("No CV generated")
