@@ -7,9 +7,10 @@ class CvFormFiller:
 
     def fill(self, cv_template: str, job_description: str) -> str:
         cv = self._ollama.chat(
-            "Replace [skills] and [experience] with relevant skills and experience without repeating them in the following cv template: "
+            "Replace placeholders in square brackets in the following cv: \n\n''' "
             + cv_template
-            + "\n to make a good match for the following job, make it short and informative, avoid using default and obvious things:\n"
+            + "'''\n\n with relevant skills and experience information to make the cv a good match for the following job description:\n\n'''"
             + job_description
+            + "'''\n\n but avoid copying the job description verbatim and feel free to make it slightly different from the description."
         )
         return cv
