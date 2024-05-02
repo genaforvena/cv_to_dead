@@ -19,7 +19,13 @@ if __name__ == "__main__":
     job_description = open(args.job).read()
     cv_template = open(args.template).read()
     review_passed = False
+    cv = None
     while not review_passed:
         cv = make_cv(job_description, cv_template)
         print(cv)
         review_passed = recruiter().review_cv(job_description, cv)
+    if cv is not None:
+        with open("resources/cv.md", "w") as f:
+            f.write(cv)
+    else:
+        print("No CV generated")
