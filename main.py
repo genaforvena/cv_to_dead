@@ -1,5 +1,5 @@
 import argparse
-import mdpdf
+from mdpdf import converter
 from roles.job_description_extractor import JobDescriptionExtractor as extractor
 from roles.cv_form_filler import CvFormFiller as filler
 from roles.recruiter import Recruiter as recruiter
@@ -29,6 +29,6 @@ if __name__ == "__main__":
     if cv is not None:
         with open("resources/cv.md", "w") as f:
             f.write(cv)
-        mdpdf.create_pdf(cv, args.output)
+        converter.Converter(args.output).convert(cv)
     else:
         print("No CV generated")
