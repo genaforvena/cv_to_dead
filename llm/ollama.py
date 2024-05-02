@@ -9,7 +9,7 @@ class Ollama:
         print()
         message = {"role": "user", "content": prompt}
         self._history.append(message)
-        resp = ollama.chat(model="phi3mini", messages=self._history, stream=True)
+        resp = ollama.chat(model="llama3", messages=self._history, stream=True)
         msg = ""
         for chunk in resp:
             p = chunk["message"]["content"]

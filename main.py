@@ -1,5 +1,6 @@
 from roles.job_description_extractor import JobDescriptionExtractor as extractor
 from roles.cv_form_filler import CvFormFiller as filler
+from roles.recruiter import Recruiter as recruiter
 
 
 def make_cv(job_description_html: str, cv_template: str) -> str:
@@ -9,11 +10,10 @@ def make_cv(job_description_html: str, cv_template: str) -> str:
 
 
 if __name__ == "__main__":
-    job_description_html = open("resources/job_description.html").read()
+    job_description = open("resources/job_description.txt").read()
     cv_template = open("resources/cv_template").read()
-    print(
-        make_cv(
-            job_description_html,
-            cv_template,
-        )
-    )
+    review_passed = False
+    while not review_passed:
+        cv = make_cv(job_description, cv_template)
+        print(cv)
+        review_passed = recruiter().review_cv(job_description, cv)
