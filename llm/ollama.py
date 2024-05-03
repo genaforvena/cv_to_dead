@@ -1,9 +1,8 @@
-import re
 import ollama
 
 
 class Ollama:
-    def __init__(self, model_name: str = "llama3:text"):
+    def __init__(self, model_name: str):
         self._history = []
         self._model_name = model_name
 

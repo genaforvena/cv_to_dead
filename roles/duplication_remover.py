@@ -2,8 +2,8 @@ from llm.ollama import Ollama
 
 
 class ExperienceDuplicationRemover:
-    def __init__(self):
-        self._ollama = Ollama()
+    def __init__(self, model_name: str):
+        self._ollama = Ollama(model_name)
         self._experiences = set()
 
     def replace_duplicates_with_something_better(self, cv: str) -> str:

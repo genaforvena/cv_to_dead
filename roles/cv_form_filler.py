@@ -2,8 +2,8 @@ from llm.ollama import Ollama
 
 
 class CvFormFiller:
-    def __init__(self):
-        self._ollama = Ollama()
+    def __init__(self, model_name: str):
+        self._ollama = Ollama(model_name)
 
     def fill(self, cv_template: str, job_description: str) -> str:
         cv = self._ollama.chat(

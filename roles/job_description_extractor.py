@@ -2,8 +2,8 @@ from llm.ollama import Ollama
 
 
 class JobDescriptionExtractor:
-    def __init__(self):
-        self._ollama = Ollama()
+    def __init__(self, model_name: str):
+        self._ollama = Ollama(model_name)
 
     def extract(self, job_description_html: str) -> str:
         job_description = self._ollama.chat(
