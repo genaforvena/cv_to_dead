@@ -1,15 +1,22 @@
+import re
 import ollama
 
 
 class Ollama:
-    def __init__(self):
+    def __init__(self, model_name: str = "llama3:text"):
         self._history = []
+        self._model_name = model_name
 
     def chat(self, prompt: str) -> str:
         print()
         message = {"role": "user", "content": prompt}
         self._history.append(message)
-        resp = ollama.chat(model="llama3", messages=self._history, stream=True)
+        if ":text" in self._model_name:
+            resp = ollama.generate(model=self._model_name, prompt=prompt, stream=True)
+        else:
+            resp = ollama.chat(
+                model=self._model_name, messages=self._history, stream=True
+            )
         msg = ""
         for chunk in resp:
             p = chunk["message"]["content"]
