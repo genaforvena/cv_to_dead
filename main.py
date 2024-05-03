@@ -21,5 +21,6 @@ if __name__ == "__main__":
         abridged_job_description = describer(model).extract(job_description)
         cv = filler(model).fill(cv_template, abridged_job_description)
         #        cv_without_duplicates = filter().replace_duplicates_with_something_better(cv)
-        cv_file = job_file.replace(".txt", "_cv.md")
+        current_time = str(int(os.path.getmtime(job_file)))
+        cv_file = job_file.replace(".txt", "_cv.md" + model + current_time)
         open(os.path.join(args.jobs_folder, cv_file), "w").write(cv)
