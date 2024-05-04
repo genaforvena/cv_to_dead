@@ -6,6 +6,21 @@ class Ollama:
         self._history = []
         self._model_name = model_name
 
+    def fill(self, cv_template: str, prompt: str) -> str:
+        print()
+        msg = ""
+        resp = ollama.generate(
+            model=self._model_name,
+            prompt=prompt,
+            template=cv_template,
+            stream=True,
+        )
+        for chunk in resp:
+            p = chunk["response"]
+            print(p, end="", flush=True)
+            msg += p
+        return msg
+
     def chat(self, prompt: str) -> str:
         print()
         message = {"role": "user", "content": prompt}

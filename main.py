@@ -1,4 +1,5 @@
 import os
+import time
 import argparse
 from roles.cv_form_filler import CvFormFiller as filler
 from roles.job_description_extractor import JobDescriptionExtractor as describer
@@ -21,6 +22,6 @@ if __name__ == "__main__":
         abridged_job_description = describer(model).extract(job_description)
         cv = filler(model).fill(cv_template, abridged_job_description)
         #        cv_without_duplicates = filter().replace_duplicates_with_something_better(cv)
-        current_time = str(int(os.path.getmtime(job_file)))
+        current_time = str(int(time.time()))
         cv_file = job_file.replace(".txt", "_cv.md" + model + current_time)
         open(os.path.join(args.jobs_folder, cv_file), "w").write(cv)
