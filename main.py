@@ -3,7 +3,7 @@ import time
 import argparse
 from roles.cv_form_filler import CvFormFiller as filler
 from roles.job_description_extractor import JobDescriptionExtractor as describer
-from roles.duplication_remover import ExperienceDuplicationRemover as filter
+from roles.experience_expander import ExperienceExpander as expander
 
 
 if __name__ == "__main__":
@@ -21,7 +21,8 @@ if __name__ == "__main__":
         job_description = open(os.path.join(args.jobs_folder, job_file)).read()
         abridged_job_description = describer(model).extract(job_description)
         cv = filler(model).fill(cv_template, abridged_job_description)
-        #        cv_without_duplicates = filter().replace_duplicates_with_something_better(cv)
+        cv = expander(model).expand(cv)
+        #        cv_without_duplicates = merger().merge(cv)
         current_time = str(int(time.time()))
         cv_file = job_file.replace(".txt", "_cv.md" + model + current_time)
         open(os.path.join(args.jobs_folder, cv_file), "w").write(cv)
