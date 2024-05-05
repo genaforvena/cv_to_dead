@@ -45,6 +45,6 @@ if __name__ == "__main__":
         )
         cv_filepath = os.path.join(args.jobs_folder, cv_filename)
         with open(cv_filepath, "w") as cv_file:
-            cv_file.write(open(template_directory + "cv_header.md", "r").read())
+            cv_file.write(open(template_directory + "/cv_header.md", "r").read())
             cv_file.write(merged_cv)
-            cv_file.write(open(template_directory + "cv_footer.md", "r").read())
+            cv_file.write(open(template_directory + "/cv_footer.md", "r").read())
