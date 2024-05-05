@@ -2,16 +2,17 @@ from llm.ollama import Ollama
 
 
 class FriendlyRecruiter:
-    def __init__(self):
-        self._ollama = Ollama()
+    def __init__(self, model_name: str):
+        self._ollama = Ollama(model_name)
 
-    def review_cv(self, job_description: str, cv: str) -> str:
+    def review_cv(self, cv: str, job_description: str) -> str:
         response = self._ollama.chat(
-            "Review the CV of a candidate for the following job description: "
+            "Review the experience of a candidate for the following job description: \n\n"
             + job_description
-            + "\nThe CV is: "
+            + "\n\nThe experience is: \n\n"
             + cv
-            + ". If the CV is suitable for the job, please respond with CV as it was. 
-            * " otherwise respond with an updated CV, that would have a missing pieces."
+            + "\n\n If the experience is suitable for the job, please respond with CV as it was."
+            + " Otherwise respond with an updated experiences, that would make the experience suitable."
         )
         return response
+

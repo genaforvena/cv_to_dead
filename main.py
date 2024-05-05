@@ -5,6 +5,7 @@ from roles.cv_form_filler import CvFormFiller as Filler
 from roles.job_description_extractor import JobDescriptionExtractor as Describer
 from roles.experience_expander import ExperienceExpander as Expander
 from roles.cv_merger import CvMerger as Merger
+from roles.recruiter import FriendlyRecruiter as Recruiter
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -27,6 +28,7 @@ if __name__ == "__main__":
     filler_instance = Filler(model_name)
     expander_instance = Expander(model_name)
     merger_instance = Merger(model_name)
+    recruiter_instance = Recruiter(model_name)
 
     for job_filename in os.listdir(args.jobs_folder):
         if not job_filename.endswith(".txt"):
@@ -34,11 +36,12 @@ if __name__ == "__main__":
         job_filepath = os.path.join(args.jobs_folder, job_filename)
         with open(job_filepath, "r") as job_file:
             job_description = job_file.read()
-        abridged_description = describer_instance.extract(job_description)
-        filled_cv = filler_instance.fill(cv_template, abridged_description)
-        expanded_cv = expander_instance.expand(filled_cv)
+        job_description = describer_instance.extract(job_description)
+        cv = filler_instance.fill(cv_template, job_description)
+        cv = expander_instance.expand(cv, job_description)
         #       similar_cv = filler_instance.make_similar(expanded_cv)
         #       merged_cv = merger_instance.merge([expanded_cv, similar_cv])
+        cv = recruiter_instance.review_cv(cv, job_description)
         timestamp = str(int(time.time()))
         cv_filename = (
             f"{job_filename.replace('.txt', '')}_cv_{model_name}_{timestamp}.md"
@@ -46,5 +49,5 @@ if __name__ == "__main__":
         cv_filepath = os.path.join(args.jobs_folder, cv_filename)
         with open(cv_filepath, "w") as cv_file:
             cv_file.write(open(template_directory + "/cv_header.md", "r").read())
-            cv_file.write(filled_cv)
+            cv_file.write(cv)
             cv_file.write(open(template_directory + "/cv_footer.md", "r").read())
