@@ -11,6 +11,6 @@ class CvFormFiller:
         return cv
 
     def make_similar(self, cv: str) -> str:
-        prompt = f"Make the CV similar to the following one, but change the experience:\n\n'''{cv}'''"
+        prompt = f"Add different sets of experiences to each position while keeping positions intact to this CV:\n\n'''{cv}'''"
         cv = self._ollama.chat(prompt)
         return cv
