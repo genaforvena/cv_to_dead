@@ -9,13 +9,19 @@ from roles.cv_merger import CvMerger as Merger
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--jobs-folder", type=str, required=True)
-    parser.add_argument("--template", type=str, required=True)
+    parser.add_argument(
+        "--template",
+        type=str,
+        required=True,
+        help="Path to the CV template to be filled, please note that cv_header.md and cv_footer.md should be in the same directory as the template and will be added to the beginning and end of the filled CV.",
+    )
     parser.add_argument("--model", type=str, default="llama3")
     args = parser.parse_args()
     model_name = args.model
 
     with open(args.template, "r") as template_file:
         cv_template = template_file.read()
+        template_directory = os.path.dirname(template_file.name)
 
     describer_instance = Describer(model_name)
     filler_instance = Filler(model_name)
@@ -39,5 +45,6 @@ if __name__ == "__main__":
         )
         cv_filepath = os.path.join(args.jobs_folder, cv_filename)
         with open(cv_filepath, "w") as cv_file:
+            cv_file.write(open(template_directory + "cv_header.md", "r").read())
             cv_file.write(merged_cv)
-
+            cv_file.write(open(template_directory + "cv_footer.md", "r").read())
