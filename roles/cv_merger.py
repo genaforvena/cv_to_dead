@@ -7,7 +7,7 @@ class CvMerger:
 
     def merge(self, cvs: list[str]) -> str:
         merged = self._ollama.chat(
-            "Merge these CVs into one, trying to pick the best parts and avoiding duplicate experience entries: "
+            "Merge these CVs into one, trying to pick the best parts from each: "
             + "\n\n\n\n".join(cvs)
         )
 
