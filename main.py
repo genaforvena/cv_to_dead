@@ -37,8 +37,8 @@ if __name__ == "__main__":
         abridged_description = describer_instance.extract(job_description)
         filled_cv = filler_instance.fill(cv_template, abridged_description)
         expanded_cv = expander_instance.expand(filled_cv)
-        similar_cv = filler_instance.make_similar(expanded_cv)
-        merged_cv = merger_instance.merge([expanded_cv, similar_cv])
+        #       similar_cv = filler_instance.make_similar(expanded_cv)
+        #       merged_cv = merger_instance.merge([expanded_cv, similar_cv])
         timestamp = str(int(time.time()))
         cv_filename = (
             f"{job_filename.replace('.txt', '')}_cv_{model_name}_{timestamp}.md"
@@ -46,5 +46,5 @@ if __name__ == "__main__":
         cv_filepath = os.path.join(args.jobs_folder, cv_filename)
         with open(cv_filepath, "w") as cv_file:
             cv_file.write(open(template_directory + "/cv_header.md", "r").read())
-            cv_file.write(merged_cv)
+            cv_file.write(filled_cv)
             cv_file.write(open(template_directory + "/cv_footer.md", "r").read())
